@@ -52,7 +52,10 @@ class MainActivity : AppCompatActivity() {
         tasks: List<Task>,
         date: String = SimpleDateFormat("dd/M/yyyy", Locale.ENGLISH).format(Date())
     ): String = "$type $date\n" +
-            "${tasks.fold("") { acc, task -> "$acc -${task.name}\nCount: ${task.count}\nTime: ${task.time} \n\n" }}\n"
+            "${
+                tasks.filter { it.name.isNotEmpty() }
+                    .fold("") { acc, task -> "$acc -${task.name}\nCount: ${task.count}\nTime: ${task.time} \n\n" }
+            }\n"
 
 
 }
